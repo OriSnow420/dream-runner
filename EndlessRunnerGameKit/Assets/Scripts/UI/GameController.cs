@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
         if(NewPlayer.Instance.coins == NewPlayer.Instance.max_coins && NewPlayer.Instance.currentTime > 0 && !flag)
         {   
-            VictoryAsync();
+            StartCoroutine(Victory());
             flag = true;
         }
 
@@ -41,33 +41,43 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public async void VictoryAsync()
+    public IEnumerator Victory()
     {
-        try
+        NewPlayer.Instance.runRightSpeed = 0;
+        NewPlayer.Instance.stopTime = true;
+        victoryMenu.SetActive(true);
+        float newTime = NewPlayer.Instance.startTime - NewPlayer.Instance.currentTime;
+        int newScore = CalculateScore(newTime);
+        AddScoreAsync(0);
+        
+        yield return new WaitForSecondsRealtime(0.3f);
+        
+        // 使用 StartCoroutine 来等待异步操作
+        yield return StartCoroutine(GetPlayerScoreAndUpdate(newScore, newTime));
+    }
+    
+    private IEnumerator GetPlayerScoreAndUpdate(int newScore, float newTime)
+    {
+        var playerscoreTask = LeaderboardsService.Instance.GetPlayerScoreAsync("dreamrunner2025");
+        
+        // 等待异步操作完成
+        while (!playerscoreTask.IsCompleted)
         {
-            NewPlayer.Instance.runRightSpeed = 0;
-            NewPlayer.Instance.stopTime = true;
-            victoryMenu.SetActive(true);
-            float newTime = NewPlayer.Instance.startTime - NewPlayer.Instance.currentTime;
-            int newScore = CalculateScore(newTime);
-            AddScoreAsync(0);
-            await Task.Delay(300);
-            var playerscore = await LeaderboardsService.Instance.GetPlayerScoreAsync("dreamrunner2025");
-            int oldScore = (int)(playerscore.Score);
-            if(newScore > oldScore)
-            {
-                AddScoreAsync(newScore - oldScore);
-                oldScore = newScore;
-            }
-            GameObject.Find("VictoryMenu/Victory").GetComponent<Text>().text = "本局用时：" + newTime.ToString("F2") + "s";
-            GameObject.Find("VictoryMenu/ScoreShow").GetComponent<Text>().text = "本局得分：" + newScore.ToString();
-            GameObject.Find("VictoryMenu/ScoreShowHistory").GetComponent<Text>().text = "历史得分：" + oldScore.ToString(); 
+            yield return null; // 每帧等待
         }
-        catch (Exception exception)
+    
+        // 获取玩家分数
+        var playerscore = playerscoreTask.Result;
+        int oldScore = (int)(playerscore.Score);
+        if (newScore > oldScore)
         {
-            Debug.Log(exception.Message);
+            AddScoreAsync(newScore - oldScore);
+            oldScore = newScore;
         }
-
+    
+        GameObject.Find("VictoryMenu/Victory").GetComponent<Text>().text = "Time: " + newTime.ToString("F2") + "s";
+        GameObject.Find("VictoryMenu/ScoreShow").GetComponent<Text>().text = "Score: " + newScore.ToString();
+        GameObject.Find("VictoryMenu/ScoreShowHistory").GetComponent<Text>().text = "Record: " + oldScore.ToString(); 
     }
 
     public async void AddScoreAsync(int score)
