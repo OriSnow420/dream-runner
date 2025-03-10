@@ -88,7 +88,7 @@ public class NewPlayer : PhysicsObject
     public float startTime = 60f;
     public float currentTime;
     public bool stopTime = false;
-    private float touchDurationThreshold = 0.2f; // 设置触摸时间阈值（以秒为单位）
+    private float touchDurationThreshold = 0.01f; // 设置触摸时间阈值（以秒为单位）
     private Dictionary<int, float> touchStartTime = new Dictionary<int, float>(); // 用于记录每一个触摸的开始时间
 
     void Start()
