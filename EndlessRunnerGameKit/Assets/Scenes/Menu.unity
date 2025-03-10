@@ -965,7 +965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &323944389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2386,7 +2386,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 46, y: 214}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &591903708
 MonoBehaviour:
@@ -2410,8 +2410,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: fish#5437
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 75f26c64aa17ae644a8615622ba52e75, type: 2}
-  m_sharedMaterial: {fileID: -8401719199691062078, guid: 75f26c64aa17ae644a8615622ba52e75,
+  m_fontAsset: {fileID: 11400000, guid: 33adf83c13cf7df409e8bd3152dca78f, type: 2}
+  m_sharedMaterial: {fileID: 8711995329870432278, guid: 33adf83c13cf7df409e8bd3152dca78f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8935,8 +8935,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 75f26c64aa17ae644a8615622ba52e75, type: 2}
-  m_sharedMaterial: {fileID: -8401719199691062078, guid: 75f26c64aa17ae644a8615622ba52e75,
+  m_fontAsset: {fileID: 11400000, guid: 33adf83c13cf7df409e8bd3152dca78f, type: 2}
+  m_sharedMaterial: {fileID: 8711995329870432278, guid: 33adf83c13cf7df409e8bd3152dca78f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
