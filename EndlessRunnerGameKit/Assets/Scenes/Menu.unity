@@ -3226,7 +3226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: leaderboards
   container: {fileID: 97729825}
-  playersPerPage: 25
+  playersPerPage: 10
   playerItemPrefab: {fileID: 520026546541013284, guid: a6584904d0e100344816c30772df7b3c,
     type: 3}
   playersContainer: {fileID: 341834691}
