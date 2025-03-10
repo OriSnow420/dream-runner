@@ -88,6 +88,8 @@ public class NewPlayer : PhysicsObject
     public float startTime = 60f;
     public float currentTime;
     public bool stopTime = false;
+    private float touchDurationThreshold = 0.2f; // 设置触摸时间阈值（以秒为单位）
+    private Dictionary<int, float> touchStartTime = new Dictionary<int, float>(); // 用于记录每一个触摸的开始时间
 
     void Start()
     {
@@ -189,6 +191,7 @@ public class NewPlayer : PhysicsObject
             {
                 if (touch.phase == TouchPhase.Began)
                 {
+                    touchStartTime[touch.fingerId] = Time.time;
                     if (animator.GetBool("grounded") == true && !jumping && jumpCounter == 0)
                     {
                         Jump(1f);
@@ -202,7 +205,16 @@ public class NewPlayer : PhysicsObject
     
                 if(touch.phase == TouchPhase.Ended && jumping)
                 {
-                    jumpCounter += 1;
+                    // 检查触摸持续时间
+                    if (touchStartTime.TryGetValue(touch.fingerId, out float startTime))
+                    {
+                        float touchDuration = Time.time - startTime;
+                        if (touchDuration >= touchDurationThreshold)
+                        {
+                            jumpCounter += 1; // 仅在超过阈值时增加 jumpCounter
+                        }
+                        touchStartTime.Remove(touch.fingerId); // 移除已结束的触摸记录
+                    }
                 }
             }
 

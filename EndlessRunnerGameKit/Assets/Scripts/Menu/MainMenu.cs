@@ -74,7 +74,7 @@ public class MainMenu : Panel
     private void RenamePlayer()
     {
         GetInputMenu panel = (GetInputMenu)PanelManager.GetSingleton("input");
-        panel.Open(RenamePlayerConfirm, GetInputMenu.Type.String, 20, "Enter a new name:", "Send", "Cancel");
+        panel.Open(RenamePlayerConfirm, GetInputMenu.Type.String, 14, "Enter a new name:", "Send", "Cancel");
         // // 添加以下代码 
         // if (Application.platform == RuntimePlatform.WebGLPlayer) 
         // { 
@@ -104,13 +104,13 @@ public class MainMenu : Panel
             else
             {
                 ErrorMenu panel = (ErrorMenu)PanelManager.GetSingleton("error");
-                panel.Open(ErrorMenu.Action.None, "Fail to change the name. The name must be in the format of \"name\" + \"class\" without space. E.g.\"ZhangSan21\".", "OK");
+                panel.Open(ErrorMenu.Action.None, "Fail to change the name. The name must be in the format of \"name\" + \"class\" without space and no longer than 14. E.g.\"ZhangSan21\".", "OK");
             }
         }
         catch
         {
             ErrorMenu panel = (ErrorMenu)PanelManager.GetSingleton("error");
-            panel.Open(ErrorMenu.Action.None, "Fail to change the name. The name must be in the format of \"name\" + \"class\" without space. E.g.\"ZhangSan21\".", "OK");
+            panel.Open(ErrorMenu.Action.None, "Fail to change the name. The name must be in the format of \"name\" + \"class\" without space and no longer than 14. E.g.\"ZhangSan21\".", "OK");
         }
         renameButton.interactable = true;
     }

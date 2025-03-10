@@ -16,6 +16,32 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
+  <style>
+    /* 添加自定义样式以确保标题和按钮位置正确 */
+    #unity-footer {
+        position: relative; /* 使footer的定位相对于其正常位置 */
+    }
+
+    #unity-webgl-logo {
+        position: absolute; /* 使用绝对定位 */
+        left: 10px; /* 靠左 */
+        top: 10px; /* 靠上 */
+    }
+
+    #unity-fullscreen-button {
+        position: absolute; /* 使用绝对定位 */
+        right: 10px; /* 靠右 */
+        top: 10px; /* 靠上 */
+    }
+
+    #unity-build-title {
+        position: absolute; /* 使用绝对定位 */
+        right: 60px; /* 靠右 */
+        top: 10px; /* 靠上 */
+        color: white; /* 适当的颜色 */
+        font-size: 20px; /* 字体大小 */
+    }
+  </style>
   <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
