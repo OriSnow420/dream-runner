@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -65,7 +64,8 @@
         updateBannerVisibility();
       }
 
-      var buildUrl = "./Build";
+
+      var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL Builds.loader.js";
       var config = {
         dataUrl: buildUrl + "/WebGL Builds.data",
@@ -135,6 +135,9 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
         }).catch((message) => {
           alert(message);
         });
